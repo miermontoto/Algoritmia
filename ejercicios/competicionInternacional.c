@@ -9,9 +9,9 @@ float competicionInternacionalDyn(int n, float p) {
   //if(a != b) exit(-1);
   float q = 1 - p;
 
-  float **resultsMatrix = (double**) malloc ((n + 1)* sizeof(double*));
+  float **resultsMatrix = (double**) malloc ((n)* sizeof(double*));
   for(int k = 0; i < n; k++)
-    mi_matriz[k] = (double*) malloc ((n + 1) * sizeof(double));
+    mi_matriz[k] = (double*) malloc ((n) * sizeof(double));
 
   for(int j = 1; i < n; j++) {
     resultsMatrix[j][0] = 0.0;
@@ -21,14 +21,20 @@ float competicionInternacionalDyn(int n, float p) {
       resultsMatrix[i][j] = p * resultsMatrix[i - 1][j] +
                               q * resultsMatrix[i][j - 1];
   }
-  return resultsMatrix[n][n];
+  return resultsMatrix[n-1][n-1];
 }
 
 float competicionInternacionalDyn2(int n, float p) {
   // con un solo vector, incializado a 0, 1, 1, ..., 1
   // reemplazando el valor de las columnas y por último el v[0]
   // el valor de la fila anterior se necesita hasta completar la fila
-  resultsArray[j] = p * resultsMatrix[j] +
-                          q * resultsMatrix[j - 1];
-                          ...
+  int *resultsArray = (double*) malloc ((n) * sizeof(double));
+  resultsArray[0] = 0;
+  for(int i = 1; i < n; i++) resultsArray[i] = 1;
+
+  for(int i = 1; i < n; i++) for(int j = 1; j < n; j++) {
+    resultsArray[j] = p * resultsMatrix[j] +
+                        q * resultsMatrix[j - 1];
+  }
+  return resultsArray[n-1][n-1];
 }
