@@ -1,0 +1,16 @@
+función iEvaluacion(A[1...n][1...n], k:entero) retorna (b:booleano) {
+  booleano b;
+  si k == 1: retorna A[1][1] == 0;
+  si no: retorna AUX(A, k) AND iEvaluacion(A, k-1);
+  fsi;
+  retorna b;
+}
+
+función AUX(A[1...n][1...n], k:entero) retorna (b:booleano) {
+  entero i = 0;
+  entero r = 0;
+  mientras i < k:
+    r = r + A[k][k-i] * A[k-i][k];
+    i = i + 1;
+  retorna r == A[k][k];
+}

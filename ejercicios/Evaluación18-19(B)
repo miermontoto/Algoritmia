@@ -1,0 +1,12 @@
+función iEvaluacion(A[1...n][1...m], k:entero) retorna (b:booleano) {
+  booleano b;
+  si k == 1: retorna VERDADERO;
+  si no: retorna iEvaluacion(A, k-1) AND AUX(A, k);
+  fsi;
+  retorna b;
+}
+
+función AUX(A[1...n][1...m], k:entero) retorna (b:booleano) {
+  entero i = m;
+  mientras i != 0: //...
+}

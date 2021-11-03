@@ -1,0 +1,27 @@
+función iEvaluacion(A[1...n][1...m], k:entero) retorna (b:booleano) {
+  booleano b;
+  si k == 1: retorna VERDADERO;
+  si no: retorna iEvaluacion(A, j, k-1) Y bandaLateral(A, k);
+  fsi;
+  retorna b;
+}
+
+función bandaLateral(A[1..n][1...m], k:entero) retorna (b:booleano) {
+  entero i = n;
+  mientras i != 0: si: A[i][k] < A[i][k-1] retorna FALSO; i = i-1;
+  retorna VERDADERO;
+}
+
+función modEvaluación(A[1...n][1...m], k:entero) retorna (b:booleano) {
+  booleano b;
+  si k == 1: retorna bandaHorizontal(A, k);
+  si no: retorna bandaHorizontal(A, k) Y modEvaluación(A, k-1);
+  fsi;
+  retorna b;
+}
+
+función	bandaHorizontal(A[1...n][1...m], k:entero) retorna (b:booleano){
+  entero i = m;
+  mientras i != 1: si A[k][i] > A[k][i-1] retorna FALSO; i = i-1;
+  retorna VERDADERO;
+}
