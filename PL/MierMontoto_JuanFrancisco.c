@@ -278,6 +278,7 @@ bool matrizSimetricaIterativo(int **x, int n) {
             check &= x[j][n-i] == x[n-i][j]; 
         }
     }
+    return check;
 }
 
 bool bandaSimetrica(int **x, int n) {
