@@ -38,16 +38,17 @@ int producto_vector_DyV(int *,int,int);
 
 // PROBLEMA 1 DEL EXAMEN RECURSION NOVIEMBRE 2021
 
-/*
+
 void lee_matriz (int **, int, int);
 void escribe_matriz (int **, int, int);
-bool EXAMEN_RECURSION_NOVIEMBRE_2021 (int **, int, int, int);
-*/
+bool e(int **, int, int, int);
+bool AUX(int**, int, int);
+
 
 // programa principal
 int main() {
 
-    int n,m;
+    int n, m;
     int *V;
 
 
@@ -66,9 +67,8 @@ int main() {
     printf("\nEl producto de los elementos del vector es %d\n\n",producto_vector_DyV(V,0,n-1));
 
 
-// PROBLEMA 1 DEL EXAMEN RECURSION NOVIEMBRE 2021
-/*
-    int n,m;
+    // PROBLEMA 1 DEL EXAMEN RECURSION NOVIEMBRE 2021
+
     printf("Dame el numero de filas: ");
     scanf("%d",&n);
     printf("Dame el numero de columnas: ");
@@ -91,7 +91,7 @@ int main() {
     escribe_matriz (M,n,m);
 
     //Invocamos a la funcion que comprueba
-    if (EXAMEN_RECURSION_NOVIEMBRE_2021(M,0,n-1,m)) printf("Se cumple que cada fila tiene un numero de ceros menor o igual que la fila inmediatamente siguiente\n\n");
+    if (e(M,0,n-1,m)) printf("Se cumple que cada fila tiene un numero de ceros menor o igual que la fila inmediatamente siguiente\n\n");
     else printf("No se cumple que cada fila tiene un numero de ceros menor o igual que la fila inmediatamente siguiente\n\n");
 
     // Liberamos el espacio reservado para las columnas
@@ -99,7 +99,7 @@ int main() {
 
     // Liberamos el espacio reservado para las filas
     free(M);
-*/
+
     return 0;
 }
 
@@ -126,7 +126,7 @@ int escribe_vector(int *V, int n){
     return 0;
 }
 
-/*
+
 void lee_matriz (int **M, int n, int m){
     int i,j;
     for (i=0;i<n;i++)
@@ -154,37 +154,52 @@ void escribe_matriz (int **M, int n, int m){
     printf("\n\n");
     }
 }
-*/
+
 
 // Funcion que proporciona el maximo del vector siguiendo el esquema de Divide y Venceras
-int maximo_vector_DyV(int *V, int inicio, int fin){
-int m, max1, max2, max;
+int maximo_vector_DyV(int *V, int inicio, int fin) {
 
-if (¿?) return ¿?;
-else {
-      // dividir
-      m=(inicio+fin)/2;
+    if (inicio == fin) return V[fin];
+    
+    int m = (inicio + fin) / 2; // dividir
 
-      // resolver
-      max1=maximo_vector_DyV(V,inicio,m);
-      max2=maximo_vector_DyV(V,m+1,fin);
+    // resolver
+    int max1 = maximo_vector_DyV(V, inicio, m);
+    int max2 = maximo_vector_DyV(V, m + 1, fin);
 
-      // combinar
-      // completar por el alumno
-    }
+    if(max1 > max2) return max1;
+    return max2;
 }
 
-/*
+
+
 // Funcion que proporciona el producto de los elementos del vector siguiendo el esquema de Divide y Venceras
-   int producto_vector_DyV(int *V, int inicio, int fin){
-   // completar por el alumno
+int producto_vector_DyV(int *V, int inicio, int fin) {
+    int m = (inicio + fin) / 2;
+    if((fin - inicio) % 2 == 0) return producto_vector_DyV(V, inicio, m) * producto_vector_DyV(V, m + 1, fin);
+    return producto_vector_DyV(V, inicio, m - 1) * producto_vector_DyV(V, m + 1, fin) * V[m];
 }
-*/
 
 
-/*
+
+
 // Funcion que soluciona el problema 1 del examen del tema 2, siguiendo el esquema de Divide y Venceras
-   bool EXAMEN_RECURSION_NOVIEMBRE_2021(int **M, int inicio_filas, int fin_filas, int m){
-   //completar por el alumno
+bool e(int **M, int inicio, int fin, int k) {
+   int m = (inicio + fin) / 2;
+
+   if(inicio == fin) return true;
+   return e(M, inicio, m, k) && e(M, m + 1, fin, k) && AUX(M , m, k);
 }
-*/
+
+bool AUX(int **M, int m, int k) {
+    int a = 0;
+    int b = 0;
+    for(int i = 0; i < k; i++) {
+        if(M[m + 1][i] == 0) b++;
+        if(M[m][i] == 0) a++;
+    }
+
+    if(a > b) return false;
+    return true;
+}
+
