@@ -10,10 +10,10 @@ float competicionInternacionalDyn(int n, float p) {
   float q = 1 - p;
 
   float **resultsMatrix = (double**) malloc ((n)* sizeof(double*));
-  for(int k = 0; i < n; k++)
+  for(int k = 0; k < n; k++)
     mi_matriz[k] = (double*) malloc ((n) * sizeof(double));
 
-  for(int j = 1; i < n; j++) {
+  for(int j = 1; j < n; j++) {
     resultsMatrix[j][0] = 0.0;
     resultsMatrix[0][j] = 1.0;
   }

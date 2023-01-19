@@ -18,7 +18,7 @@ int rayuelaDynIterativo(int n) {
   int* rbfr = (int*) malloc (n*sizeof(int));
   rbfr[0] = 1;
   rbfr[1] = 2;
-  for(int i = 2; i < n, i++) {
+  for(int i = 2; i < n; i++) {
     rbfr[i] = rbfr[i - 1] + rbfr[i - 2];
   }
 
